@@ -1,4 +1,4 @@
-module github.com/anush008/fastembed-go
+module github.com/grumpylabs/fastembed-go
 
 go 1.21
 
