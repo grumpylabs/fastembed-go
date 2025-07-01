@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"io"
 	"io/fs"
+	"log"
 	"math"
 	"net/http"
 	"os"
@@ -434,11 +435,11 @@ func downloadFromGcs(model EmbeddingModel, cacheDir string, showDownloadProgress
 	// If  the model name is AllMiniLML6V2 then it's in a different place
 	var downloadURL string
 	if model == AllMiniLML6V2 {
-		downloadURL = "https://storage.googleapis.com/qdrant-fastembed/sentence-transformers-all-MiniLM-L12-v2.tar.gz"
+		downloadURL = "https://storage.googleapis.com/qdrant-fastembed/sentence-transformers-all-MiniLM-L6-v2.tar.gz"
 	} else {
 		downloadURL = fmt.Sprintf("https://storage.googleapis.com/qdrant-fastembed/%s.tar.gz", model)
 	}
-
+	log.Printf("Downloading %s...as URL %s\n", model, downloadURL)
 	response, err := http.Get(downloadURL)
 	if err != nil {
 		return "", err
