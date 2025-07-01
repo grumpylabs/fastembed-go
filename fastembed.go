@@ -430,7 +430,14 @@ func downloadFromGcs(model EmbeddingModel, cacheDir string, showDownloadProgress
 	// 	modelName = "intfloat" + model[strings.Index(string(model), "-"):]
 	// }
 
-	downloadURL := fmt.Sprintf("https://storage.googleapis.com/qdrant-fastembed/%s.tar.gz", model)
+	// ---
+	// If  the model name is AllMiniLML6V2 then it's in a different place
+	var downloadURL string
+	if model == AllMiniLML6V2 {
+		downloadURL = "https://storage.googleapis.com/qdrant-fastembed/sentence-transformers-all-MiniLM-L12-v2.tar.gz"
+	} else {
+		downloadURL = fmt.Sprintf("https://storage.googleapis.com/qdrant-fastembed/%s.tar.gz", model)
+	}
 
 	response, err := http.Get(downloadURL)
 	if err != nil {
